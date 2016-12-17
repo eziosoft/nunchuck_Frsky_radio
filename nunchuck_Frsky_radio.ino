@@ -3,10 +3,14 @@
 #include "ppm_generator.h"
 #include "telemetry.h"
 
+/////////////////////////////////////////////////
+#define MIN_PULSE = 1000;
+#define MAX_PULSE = 2000;
+/////////////////////////////////////////////////
+
 WiiChuck chuck = WiiChuck();
 
 void setup() {
-  //nunchuck_init();
   Serial.begin(115200);
   chuck.begin();
   chuck.update();
@@ -20,28 +24,28 @@ void loop() {
   delay(20);
   chuck.update();
 
-  ppm[0] = map(chuck.readJoyY(), 0, 256, 1000, 2000);
-  ppm[1] = map(chuck.readJoyX(), 0, 256, 1000, 2000);
+  ppm[0] = map(chuck.readJoyY(), 0, 256, MIN_PULSE, MAX_PULSE);
+  ppm[1] = map(chuck.readJoyX(), 0, 256, MIN_PULSE, MAX_PULSE);
 
-  ppm[2] = map(chuck.readRoll(), -90, 90, 1000, 2000);
-  ppm[3] = map(chuck.readAccelY(), 0, 180, 1000, 2000);
+  ppm[2] = map(chuck.readRoll(), -90, 90, MIN_PULSE, MAX_PULSE);
+  ppm[3] = map(chuck.readAccelY(), 0, 180, MIN_PULSE, MAX_PULSE);
 
   if (chuck.buttonZ) {
-    ppm[4] = 2000;
+    ppm[4] = MAX_PULSE;
   } else  {
-    ppm[4] = 1000;
+    ppm[4] = MIN_PULSE;
   }
 
   if (chuck.buttonC) {
-    ppm[5] = 2000;
+    ppm[5] = MAX_PULSE;
   } else  {
-    ppm[5] = 1000;
+    ppm[5] = MIN_PULSE;
   }
 
   for (int i = 0; i < CHANNEL_NUMBER; i++)
   {
-    if (ppm[i] < 1000) ppm[i] = 1000;
-    if (ppm[i] > 2000) ppm[i] = 2000;
+    if (ppm[i] < MIN_PULSE) ppm[i] = MIN_PULSE;
+    if (ppm[i] > MAX_PULSE) ppm[i] = MAX_PULSE;
   }
 
   for (int i = 0; i < CHANNEL_NUMBER; i++)
