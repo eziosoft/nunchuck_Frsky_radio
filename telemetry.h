@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-#include <FrSky.h>
+#include "FrSky.h"
 FrSky frsky;
 SoftwareSerial mySerial(10, 11, true); // RX, TX, inverse
 
