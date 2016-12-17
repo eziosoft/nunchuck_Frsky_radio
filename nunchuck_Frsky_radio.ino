@@ -26,6 +26,18 @@ void loop() {
   ppm[2] = map(chuck.readRoll(), -90, 90, 1000, 2000);
   ppm[3] = map(chuck.readAccelY(), 0, 180, 1000, 2000);
 
+  if (chuck.buttonZ) {
+    ppm[4] = 2000;
+  } else  {
+    ppm[4] = 1000;
+  }
+
+  if (chuck.buttonC) {
+    ppm[5] = 2000;
+  } else  {
+    ppm[5] = 1000;
+  }
+
   for (int i = 0; i < CHANNEL_NUMBER; i++)
   {
     if (ppm[i] < 1000) ppm[i] = 1000;
@@ -52,7 +64,7 @@ void loop() {
     Serial.print("Telemetry RSSI: ");
     Serial.println(frsky.getLink_dn());
   }
-  
+
   //  Serial.print(chuck.readJoyX());
   //  Serial.print(", ");
   //  Serial.print(chuck.readJoyY());
