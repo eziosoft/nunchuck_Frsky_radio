@@ -45,11 +45,14 @@ void loop() {
 
 
 
-//telemetry
-  Serial.print("TX RSSI: ");
-  Serial.println(frsky.getLink_up());
-  Serial.print("Telemetry RSSI: ");
-  Serial.println(frsky.getLink_dn());
+  //telemetry
+  if (telemetry_loop()) {
+    Serial.print("TX RSSI: ");
+    Serial.println(frsky.getLink_up());
+    Serial.print("Telemetry RSSI: ");
+    Serial.println(frsky.getLink_dn());
+  }
+  
   //  Serial.print(chuck.readJoyX());
   //  Serial.print(", ");
   //  Serial.print(chuck.readJoyY());
