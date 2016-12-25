@@ -25,12 +25,6 @@ void ppm_setup() {
   pinMode(sigPin, OUTPUT);
   digitalWrite(sigPin, !onState);  //set the PPM signal pin to the default state (off)
 
-  pinMode(A1, OUTPUT);
-  digitalWrite(A1, 0);
-
-  pinMode(A5, OUTPUT);
-  digitalWrite(A5, 1);
-
 
   cli();
   TCCR1A = 0; // set entire TCCR1 register to 0
@@ -45,26 +39,6 @@ void ppm_setup() {
   Serial.begin(115200);
 
 }
-
-//void loop() {
-//  int x = analogRead(A3);
-//  int y = analogRead(A2);
-//  int bt = analogRead(A6);
-//
-//  x = map(x, 0, 1024, 1000, 2000);
-//  y = map(y, 0, 1024, 1000, 2000);
-//  bt = map(bt, 0, 1024, 1000, 2000);
-//  //  Serial.print(x);
-//  //  Serial.print("x");
-//  //  Serial.print(y);
-//  //  Serial.print("x");
-//  //  Serial.println(bt);
-//
-//  ppm[0] = x;
-//  ppm[1] = y;
-//  ppm[2] = bt;
-//}
-
 
 ISR(TIMER1_COMPA_vect) { //leave this alone
   static boolean state = true;
