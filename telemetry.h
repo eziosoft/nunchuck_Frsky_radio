@@ -1,11 +1,17 @@
 #include <SoftwareSerial.h>
 #include "FrSky.h"
 FrSky frsky;
-SoftwareSerial mySerial(10, 11, true); // RX, TX, inverse
+SoftwareSerial mySerial(11, 10, true); // RX, TX, inverse
 
 void telemetry_setup()
 {
-  Serial.begin(9600);
+  mySerial.begin(9600);
+}
+
+void telemetryTest()
+{
+  if (mySerial.available())
+    Serial.println(mySerial.read());
 }
 
 char telemetry_loop() {
