@@ -91,7 +91,7 @@ void loop() {
 
   //battery
   if (millis() > timer1) {
-    timer1 = millis() + 10000;
+    timer1 = millis() + 5000;
     vBat = map(analogRead(A7), 0, 1023, 0, 500);
     Serial.print("vBat ");
     Serial.println(vBat);
