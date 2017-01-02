@@ -10,8 +10,9 @@ void telemetry_setup()
 
 void telemetryTest()
 {
-  if (mySerial.available())
-    Serial.println(mySerial.read());
+  while (mySerial.available())
+    Serial.print(mySerial.read());
+    
 }
 
 char telemetry_loop() {
